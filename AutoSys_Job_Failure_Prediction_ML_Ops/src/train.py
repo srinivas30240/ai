@@ -195,11 +195,17 @@ def train_final_model():
     if  models_dir.exists():
         shutil.rmtree( models_dir)
     models_dir.mkdir(parents=True, exist_ok=True)
-    if final_model is not None:
-        joblib.dump(final_model, models_dir / "autosys_model.pkl")
-        print("Model saved successfully ✅")
-    else:
-        raise ValueError("Training failed: final_model is None")
+    # Save model with timestamp
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    model_file = models_dir / f"autosys_model_{timestamp}.pkl"
+    joblib.dump(final_model, model_file)
+
+    print(f"Model saved successfully ✅ at {model_file}")
+    # if final_model is not None:
+    #     joblib.dump(final_model, models_dir / "autosys_model.pkl")
+    #     print("Model saved successfully ✅")
+    # else:
+    #     raise ValueError("Training failed: final_model is None")
 
     print("Model saved successfully ✅")
 
