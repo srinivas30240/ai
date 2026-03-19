@@ -184,23 +184,23 @@ def train_final_model():
     # ===============================
     # SAVE MODEL (MLOPS)
     # ===============================
-    print("\nStep 12: Saving Model")
+    # print("\nStep 12: Saving Model")
 
-    # os.makedirs("models", exist_ok=True)
+    # # os.makedirs("models", exist_ok=True)
 
-    # joblib.dump(final_model, "models/autosys_model.pkl")
-    from pathlib import Path
-    BASE_DIR = Path(__file__).resolve().parent.parent  # go up from src/ to ML folder
-    models_dir = BASE_DIR / "models"
-    if  models_dir.exists():
-        shutil.rmtree( models_dir)
-    models_dir.mkdir(parents=True, exist_ok=True)
-    # Save model with timestamp
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    model_file = models_dir / f"autosys_model_{timestamp}.pkl"
-    joblib.dump(final_model, model_file)
+    # # joblib.dump(final_model, "models/autosys_model.pkl")
+    # from pathlib import Path
+    # BASE_DIR = Path(__file__).resolve().parent.parent  # go up from src/ to ML folder
+    # models_dir = BASE_DIR / "models"
+    # if  models_dir.exists():
+    #     shutil.rmtree( models_dir)
+    # models_dir.mkdir(parents=True, exist_ok=True)
+    # # Save model with timestamp
+    # timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    # model_file = models_dir / f"autosys_model_{timestamp}.pkl"
+    # joblib.dump(final_model, model_file)
 
-    print(f"Model saved successfully ✅ at {model_file}")
+    # print(f"Model saved successfully ✅ at {model_file}")
     # if final_model is not None:
     #     joblib.dump(final_model, models_dir / "autosys_model.pkl")
     #     print("Model saved successfully ✅")
@@ -208,6 +208,29 @@ def train_final_model():
     #     raise ValueError("Training failed: final_model is None")
 
     print("Model saved successfully ✅")
+
+    print("\nStep 12: Saving Model")
+
+    # Set base directory
+    BASE_DIR = Path.cwd()  # safer for GitHub Actions
+
+    # Models folder
+    models_dir = BASE_DIR / "models"
+
+    # Remove if exists
+    if models_dir.exists():
+        shutil.rmtree(models_dir)
+
+    # Recreate folder
+    models_dir.mkdir(parents=True, exist_ok=True)
+
+    # Save model with timestamp
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    model_file = models_dir / f"autosys_model_{timestamp}.pkl"
+
+    joblib.dump(final_model, model_file)
+
+    print(f"Model saved successfully ✅ at {model_file}")
 
     return final_model
 
