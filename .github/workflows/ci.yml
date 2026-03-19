@@ -34,7 +34,7 @@ jobs:
 
       - name: Train the model
         run: |
-          python /src/predict.py
+          python src/train.py
           ls -la models
           
       - name: uploading artifacts 
