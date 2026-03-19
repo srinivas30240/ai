@@ -195,8 +195,11 @@ def train_final_model():
     if  models_dir.exists():
         shutil.rmtree( models_dir)
     models_dir.mkdir(parents=True, exist_ok=True)
-
-    joblib.dump(final_model, models_dir / "autosys_model.pkl")
+    if final_model is not None:
+        joblib.dump(final_model, models_dir / "autosys_model.pkl")
+        print("Model saved successfully ✅")
+    else:
+        raise ValueError("Training failed: final_model is None")
 
     print("Model saved successfully ✅")
 

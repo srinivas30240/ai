@@ -52,6 +52,12 @@ jobs:
       # Run prediction (optional)
       - name: Run prediction
         run: python src/predict.py || echo "Prediction script finished"
+      - name: Check models folder
+        run: |
+          if [ -z "$(ls -A models)" ]; then
+            echo "No models found! Failing workflow."
+            exit 1
+          fi
 
       # Upload trained models as artifacts
       - name: Upload ML artifacts
