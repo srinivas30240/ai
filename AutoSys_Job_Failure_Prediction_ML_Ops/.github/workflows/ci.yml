@@ -1,0 +1,5 @@
+name: CI - train and save model
+
+on:
+  push:
+    branches:[ master ]
