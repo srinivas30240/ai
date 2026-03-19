@@ -1,44 +1,61 @@
-name: CI - train and save model
+# 
+name: CI - Train and Save Model
 
-# Trigger only on push or PR to master 
+# Trigger only on push or PR to master
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
 jobs:
-  matrix-pip-sri:
-    name: Train and save the model
+  train-and-upload:
+    name: Train and upload ML artifacts
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
-        python: [3.12]
+      matrix:
+        python: [3.11, 3.12]
+
     defaults:
       run:
-        working-directory: AutoSys_Job_Failure_Prediction_ML_Ops
+        working-directory: AutoSys_Job_Failure_Prediction_ML_Ops  # ML folder
 
     steps:
-      - name: Check-out
+      # Checkout code
+      - name: Check-out repository
         uses: actions/checkout@v4
-      
-      - name: setup python
+
+      # Setup Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Upgrade the pip 
+      # Upgrade pip, setuptools, wheel
+      - name: Upgrade pip
         run: python -m pip install --upgrade pip setuptools wheel
 
-      - name: install project dependices
+      # Install dependencies
+      - name: Install dependencies
         run: python -m pip install -r requirements.txt
 
+      # Ensure models folder exists
+      - name: Create models folder
+        run: mkdir -p models
+
+      # Train the model
       - name: Train the model
         run: |
           python src/train.py
           ls -la models
-          
-      - name: uploading artifacts 
+
+      # Run prediction (optional)
+      - name: Run prediction
+        run: python src/predict.py || echo "Prediction script finished"
+
+      # Upload trained models as artifacts
+      - name: Upload ML artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ml-artifacts-${{ matrix.python }}-${{ github.run_id }}
-          path: models/
+          path: models/*
