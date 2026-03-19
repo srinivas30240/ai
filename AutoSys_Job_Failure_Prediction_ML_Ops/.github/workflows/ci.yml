@@ -1,6 +1,6 @@
 name: CI - train and save model
 
-# Trigger only on push or PR to master
+# Trigger only on push or PR to master 
 on:
   push:
     branches: [ master ]
