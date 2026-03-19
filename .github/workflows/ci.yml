@@ -13,6 +13,9 @@ jobs:
     strategy:
       matrix: 
         python: [3.11, 3.12]
+    defaults:
+      run:
+        working-directory: AutoSys_Job_Failure_Prediction_ML_Ops
 
     steps:
       - name: Check-out
