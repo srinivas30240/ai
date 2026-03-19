@@ -49,9 +49,9 @@ jobs:
           python src/train.py
           ls -la models
 
-      # Run prediction (optional)
-      - name: Run prediction
-        run: python src/predict.py || echo "Prediction script finished"
+      # # Run prediction (optional)
+      # - name: Run prediction
+      #   run: python src/predict.py || echo "Prediction script finished"
       - name: Check models folder
         run: |
           if [ -z "$(ls -A models)" ]; then
