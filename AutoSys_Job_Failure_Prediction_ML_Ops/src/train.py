@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import os
 import joblib
+import shutil
 
 # Visualization (optional)
 import matplotlib.pyplot as plt
@@ -191,6 +192,8 @@ def train_final_model():
     from pathlib import Path
     BASE_DIR = Path(__file__).resolve().parent.parent  # go up from src/ to ML folder
     models_dir = BASE_DIR / "models"
+    if  models_dir.exists():
+        shutil.rmtree( models_dir)
     models_dir.mkdir(parents=True, exist_ok=True)
 
     joblib.dump(final_model, models_dir / "autosys_model.pkl")
