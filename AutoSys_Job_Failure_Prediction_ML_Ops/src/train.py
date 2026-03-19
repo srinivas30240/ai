@@ -34,7 +34,7 @@ def train_final_model():
     print("Step 1: Loading dataset...")
 
     # Use relative path (IMPORTANT for GitHub)
-    df = pd.read_csv("C:/Users/Shrinivas/Desktop/training/code_python/vectordatabase/AutoSys_Job_Failure_Prediction/data/autosys_dataset.csv")
+    df = pd.read_csv("data/autosys_dataset.csv")
 
     # ===============================
     # EDA
