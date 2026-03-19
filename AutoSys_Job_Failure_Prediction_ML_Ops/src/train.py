@@ -185,9 +185,15 @@ def train_final_model():
     # ===============================
     print("\nStep 12: Saving Model")
 
-    os.makedirs("models", exist_ok=True)
+    # os.makedirs("models", exist_ok=True)
 
-    joblib.dump(final_model, "models/autosys_model.pkl")
+    # joblib.dump(final_model, "models/autosys_model.pkl")
+    from pathlib import Path
+    BASE_DIR = Path(__file__).resolve().parent.parent  # go up from src/ to ML folder
+    models_dir = BASE_DIR / "models"
+    models_dir.mkdir(parents=True, exist_ok=True)
+
+    joblib.dump(final_model, models_dir / "autosys_model.pkl")
 
     print("Model saved successfully ✅")
 
