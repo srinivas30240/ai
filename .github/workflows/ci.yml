@@ -58,10 +58,11 @@ jobs:
             echo "No models found! Failing workflow."
             exit 1
           fi
-
+      - name: Debug models folder
+        run: ls -la ${{ github.workspace }}/AutoSys_Job_Failure_Prediction_ML_Ops/models
       # Upload trained models as artifacts
       - name: Upload ML artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ml-artifacts-${{ matrix.python }}-${{ github.run_id }}
-          path: models/**/*  #${{ github.workspace }}/AutoSys_Job_Failure_Prediction_ML_Ops/models/*
+          path: ${{ github.workspace }}/AutoSys_Job_Failure_Prediction_ML_Ops/models/**/*
