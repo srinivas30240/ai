@@ -64,4 +64,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ml-artifacts-${{ matrix.python }}-${{ github.run_id }}
-          path: ${{ github.workspace }}/AutoSys_Job_Failure_Prediction_ML_Ops/models/*
+          path: models/**/*  #${{ github.workspace }}/AutoSys_Job_Failure_Prediction_ML_Ops/models/*
