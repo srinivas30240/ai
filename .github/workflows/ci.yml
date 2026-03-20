@@ -1,4 +1,4 @@
-# 
+# CI for autosys jobs
 name: CI - Train and Save Model
 
 # Trigger only on push or PR to master
