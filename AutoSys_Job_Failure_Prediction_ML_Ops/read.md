@@ -98,6 +98,11 @@ The trained model is saved using joblib:
 
 This allows reuse without retraining.
 
+##APP.py
+curl -X POST http://127.0.0.1:5001/predict ^
+-H "Content-Type: application/json" ^
+-d "{\"features\": [20,51,900,10,15]}" 
+
 ---
 
 ## 🔮 Future Improvements
