@@ -1,0 +1,4 @@
+[core]
+    remote = autosys_failure
+['remote "autosys_failure"']
+    url = s3://autosys-jobfailure-prediction-ml-ops
